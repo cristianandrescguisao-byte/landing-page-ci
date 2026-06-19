@@ -1,0 +1,41 @@
+name: CI Landing Page Politica
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-files:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del repositorio
+      uses: actions/checkout@v4
+
+    - name: Validar estructura minima del proyecto
+      run: |
+        echo "Validando archivos requeridos..."
+        
+        if [ ! -f "index.html" ]; then
+          echo "❌ Error: index.html no existe."
+          exit 1
+        fi
+        
+        if [ ! -f "css/style.css" ]; then
+          echo "❌ Error: css/style.css no existe."
+          exit 1
+        fi
+        
+        if [ ! -f "js/script.js" ]; then
+          echo "❌ Error: js/script.js no existe."git 
+          exit 1
+        fi
+        
+        if [ ! -f "README.md" ]; then
+          echo "❌ Error: README.md no existe."
+          exit 1
+        fi
+        
+        echo "✅ Todos los archivos requeridos existen y estan en la ruta correcta."
